@@ -1,27 +1,346 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light theme */
+  --background: #f4f1ea;
+  --foreground: #1c2420;
+  --accent: #4a7c65;
+
+  /* Glass */
+  --glass-background: rgba(255, 255, 255, 0.34);
+  --glass-background-strong: rgba(255, 255, 255, 0.48);
+  --glass-border: rgba(255, 255, 255, 0.48);
+
+  /* Supporting colors */
+  --blob-amber: rgba(226, 178, 110, 0.28);
+  --blob-sage: rgba(127, 191, 160, 0.25);
+  --blob-sky: rgba(127, 176, 214, 0.24);
+
+  /* Shadows */
+  --shadow-glass:
+    0 20px 60px rgba(28, 36, 32, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+
+  --shadow-glass-hover:
+    0 28px 80px rgba(28, 36, 32, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  /* Radius */
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --radius-pill: 9999px;
+
+  /* Motion */
+  --transition-fast: 180ms ease;
+  --transition-normal: 280ms ease;
+  --transition-slow: 450ms ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+.dark {
+  --background: #0d1016;
+  --foreground: #ecefea;
+  --accent: #7fbfa0;
+
+  --glass-background: rgba(255, 255, 255, 0.05);
+  --glass-background-strong: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  /* Deep navy / teal / plum blobs */
+  --blob-amber: rgba(32, 43, 70, 0.34);
+  --blob-sage: rgba(48, 102, 94, 0.28);
+  --blob-sky: rgba(87, 53, 92, 0.3);
+
+  --shadow-glass:
+    0 24px 70px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  --shadow-glass-hover:
+    0 32px 90px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  color: var(--foreground);
+  margin: 0;
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--foreground);
+
+  font-family: "Manrope", "Hind Siliguri", sans-serif;
+
+  transition:
+    background-color var(--transition-slow),
+    color var(--transition-slow);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", "Noto Sans Bengali", sans-serif;
+}
+
+p {
+  margin: 0;
+}
+
+.font-bengali {
+  font-family: "Noto Sans Bengali", sans-serif;
+}
+
+.font-bengali-body {
+  font-family: "Hind Siliguri", sans-serif;
+}
+
+/* =========================================================
+   BACKGROUND
+   ========================================================= */
+
+.site-background {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  isolation: isolate;
+  background: var(--background);
+}
+
+.site-background::before,
+.site-background::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+
+  width: 32rem;
+  height: 32rem;
+
+  border-radius: 9999px;
+  filter: blur(90px);
+
+  opacity: 0.9;
+  transition:
+    background-color var(--transition-slow),
+    transform var(--transition-slow);
+}
+
+.site-background::before {
+  top: -12rem;
+  left: -10rem;
+  background: var(--blob-amber);
+}
+
+.site-background::after {
+  right: -10rem;
+  bottom: -12rem;
+  background: var(--blob-sage);
+}
+
+.background-blob {
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+
+  width: 26rem;
+  height: 26rem;
+
+  border-radius: 9999px;
+  filter: blur(100px);
+
+  background: var(--blob-sky);
+  opacity: 0.8;
+
+  top: 35%;
+  left: 42%;
+
+  transition:
+    background-color var(--transition-slow),
+    opacity var(--transition-slow);
+}
+
+/* =========================================================
+   GLASS PRIMITIVE
+   ========================================================= */
+
+.glass {
+  background: var(--glass-background);
+
+  border: 1px solid var(--glass-border);
+
+  box-shadow: var(--shadow-glass);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal),
+    background-color var(--transition-normal),
+    border-color var(--transition-normal);
+}
+
+.glass-strong {
+  background: var(--glass-background-strong);
+
+  border: 1px solid var(--glass-border);
+
+  box-shadow: var(--shadow-glass);
+
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.glass-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glass-hover);
+}
+
+/* =========================================================
+   GLASS SHAPES
+   ========================================================= */
+
+.glass-card {
+  border-radius: var(--radius-lg);
+}
+
+.glass-panel {
+  border-radius: var(--radius-xl);
+}
+
+.glass-pill {
+  border-radius: var(--radius-pill);
+}
+
+/* =========================================================
+   BUTTON FOUNDATION
+   ========================================================= */
+
+.glass-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  min-height: 2.75rem;
+  padding: 0.7rem 1.15rem;
+
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+
+  background: var(--glass-background);
+  color: var(--foreground);
+
+  box-shadow: var(--shadow-glass);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  font-family: "Manrope", "Hind Siliguri", sans-serif;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.glass-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glass-hover);
+}
+
+.glass-button:active {
+  transform: translateY(0);
+}
+
+.glass-button-primary {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .site-background::before,
+  .site-background::after {
+    width: 20rem;
+    height: 20rem;
+    filter: blur(70px);
+  }
+
+  .background-blob {
+    width: 18rem;
+    height: 18rem;
+    filter: blur(80px);
   }
 }
