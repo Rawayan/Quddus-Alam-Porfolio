@@ -1,0 +1,63 @@
+{
+  "common": {
+    "home": "Home",
+    "gallery": "Gallery",
+    "achievements": "Achievements",
+    "gaibandha": "Gaibandha",
+    "contact": "Contact",
+    "viewGallery": "View Gallery",
+    "contactMe": "Contact Me",
+    "learnMore": "Learn More",
+    "language": "Language",
+    "english": "English",
+    "bengali": "বাংলা",
+    "toggleTheme": "Toggle theme"
+  },
+
+  "home": {
+    "eyebrow": "Photography Portfolio",
+    "title": "Md. Quddus Alam",
+    "description": "Freelance photojournalist and visual storyteller from Gaibandha, Bangladesh.",
+    "yearsActive": "Years Active",
+    "exhibitions": "Exhibitions",
+    "awards": "Awards"
+  },
+
+  "gallery": {
+    "title": "Gallery",
+    "description": "A collection of photographs documenting landscapes, rural life, rivers, fields, and skies.",
+    "all": "All",
+    "rivers": "Rivers",
+    "rural": "Rural Life",
+    "fields": "Fields",
+    "skies": "Skies"
+  },
+
+  "achievements": {
+    "title": "Achievements",
+    "description": "A timeline of awards, exhibitions, publications, and recognition.",
+    "awards": "Awards",
+    "exhibitions": "Exhibitions",
+    "publications": "Publications",
+    "recognition": "Recognition"
+  },
+
+  "gaibandha": {
+    "title": "Gaibandha",
+    "description": "A visual journey through the landscapes and everyday life of Gaibandha."
+  },
+
+  "contact": {
+    "title": "Contact",
+    "description": "For print enquiries, digital copies, collaborations, or other questions.",
+    "name": "Name",
+    "email": "Email",
+    "reason": "Reason",
+    "message": "Message",
+    "send": "Send Enquiry",
+    "buyPrint": "Buy printed copy",
+    "buyDigital": "Buy digital copy",
+    "talk": "Talk to him",
+    "other": "Other"
+  }
+}
