@@ -70,8 +70,23 @@
 
 
   "gaibandha": {
-    "title": "Gaibandha",
-    "description": "A visual journey through the landscapes and everyday life of Gaibandha."
+    "eyebrow": "Gaibandha",
+  "title": "A place seen through a familiar lens",
+  "description": "A visual journey through the rivers, rural landscapes, fields, and everyday life of Gaibandha.",
+  "explore": "Explore Gaibandha",
+  "panoramic": "Panoramic",
+  "strip": "River & Rural Life",
+  "asymmetric": "Land & Landscape",
+  "quad": "Four Views",
+  "emptyTitle": "Photographs are coming soon",
+  "emptyDescription": "The Gaibandha collection is ready for the final photographs to be added during the content integration stage.",
+  "viewPhoto": "View photograph",
+  "previous": "Previous",
+  "next": "Next",
+  "mapTitle": "Explore the collection",
+  "mapDescription": "Choose a section to jump directly to that part of the collection.",
+  "sectionPhotos": "{count} photographs",
+  "enquire": "Enquire about this print"
   },
 
   "contact": {
