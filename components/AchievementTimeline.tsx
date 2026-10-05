@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import type { Locale } from "@/content/types";
 
 import type {
   Achievement,
@@ -25,7 +26,7 @@ const filters: FilterKey[] = [
 export default function AchievementTimeline({
   achievements,
 }: AchievementTimelineProps) {
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   const t = useTranslations("achievements");
 
   const [activeFilter, setActiveFilter] =

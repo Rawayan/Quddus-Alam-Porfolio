@@ -1,12 +1,7 @@
 "use client";
-
+import type { Locale, GaibandhaSection, Photo } from "@/content/types";
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-
-import type {
-  GaibandhaSection,
-  Photo,
-} from "@/content/types";
 
 import PhotoFrame from "@/components/PhotoFrame";
 import Lightbox from "@/components/Lightbox";
@@ -29,7 +24,7 @@ export default function GaibandhaGallery({
   sections,
   photos,
 }: GaibandhaGalleryProps) {
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   const t = useTranslations("gaibandha");
 
   const [lightbox, setLightbox] = useState<{

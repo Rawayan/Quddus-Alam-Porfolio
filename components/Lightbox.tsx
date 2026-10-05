@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import type { Photo } from "@/content/types";
+import type { Locale, Photo } from "@/content/types";
 
 type LightboxProps = {
   photos: Photo[];
@@ -17,7 +17,7 @@ export default function Lightbox({
   initialIndex,
   onClose,
 }: LightboxProps) {
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   const t = useTranslations("gallery");
 
   const [currentIndex, setCurrentIndex] = useState(initialIndex);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
+import type { Locale } from "@/content/types";
 
 import type { GaibandhaSection } from "@/content/types";
 
@@ -30,7 +31,7 @@ const positions = [
 export default function GaibandhaMap({
   sections,
 }: GaibandhaMapProps) {
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   const t = useTranslations("gaibandha");
 
   const scrollToSection = (id: string) => {

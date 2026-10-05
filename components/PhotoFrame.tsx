@@ -1,70 +1,35 @@
+import type { ReactNode } from "react";
+import type { Photo } from "@/content/types";
 import PhotoImage from "./PhotoImage";
 
 type PhotoFrameProps = {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  blurDataURL?: string;
-  priority?: boolean;
+  photo: Photo;
   className?: string;
+  children?: ReactNode;
 };
 
 export default function PhotoFrame({
-  src,
-  alt,
-  width,
-  height,
-  blurDataURL,
-  priority = false,
-  className = ""
+  photo,
+  className = "",
+  children,
 }: PhotoFrameProps) {
   return (
-    <div
-      className={`
-        glass
-        glass-card
-        group
-        relative
-        overflow-hidden
-        ${className}
-      `}
+    <figure
+      className={`group relative overflow-hidden rounded-[var(--radius-lg)] ${className}`}
       style={{
-        aspectRatio: `${width} / ${height}`
+        aspectRatio: `${photo.width} / ${photo.height}`,
       }}
     >
       <PhotoImage
-        src={src}
-        alt={alt}
-        fill
-        priority={priority}
-        sizes="
-          (max-width: 640px) 100vw,
-          (max-width: 1024px) 50vw,
-          33vw
-        "
-        blurDataURL={blurDataURL}
-        className="
-          object-cover
-          transition
-          duration-700
-          ease-out
-          group-hover:scale-[1.03]
-        "
+        src={photo.src}
+        alt={photo.alt.en}
+        width={photo.width}
+        height={photo.height}
+        blurDataURL={photo.blurDataURL}
+        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
       />
 
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          bg-gradient-to-t
-          from-black/30
-          via-transparent
-          to-transparent
-          opacity-70
-        "
-      />
-    </div>
+      {children}
+    </figure>
   );
 }

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-
+import type { Locale } from "@/content/types";
 import type { Photo, PhotoCategory } from "@/content/types";
 import { photos } from "@/content/photos";
 import PhotoFrame from "@/components/PhotoFrame";
@@ -36,7 +36,7 @@ function shufflePhotos(items: Photo[]) {
 
 export default function GalleryGrid() {
   const t = useTranslations("gallery");
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
 
   const [orderedPhotos, setOrderedPhotos] = useState<Photo[]>([]);
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
