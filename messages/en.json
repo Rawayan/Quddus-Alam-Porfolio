@@ -47,13 +47,27 @@
   },
 
   "achievements": {
-    "title": "Achievements",
-    "description": "A timeline of awards, exhibitions, publications, and recognition.",
+    "eyebrow": "Career & Recognition",
+    "title": "A journey documented through the years",
+    "description": "Awards, exhibitions, publications, and recognition from a career dedicated to photography and photojournalism.",
+    "all": "All",
+    "award": "Awards",
+    "exhibition": "Exhibitions",
+    "publication": "Publications",
+    "recognition": "Recognition",
+    "emptyTitle": "Achievements are coming soon",
+    "emptyDescription": "The achievements timeline is ready. Verified career milestones will be added during the content integration stage.",
+    "timeline": "Career Timeline",
+    "year": "Year",
+    "entries": "{count} achievements",
+    "stats": {
+    "years": "Years of Work",
     "awards": "Awards",
     "exhibitions": "Exhibitions",
-    "publications": "Publications",
-    "recognition": "Recognition"
+    "publications": "Publications"
+  }
   },
+
 
   "gaibandha": {
     "title": "Gaibandha",
@@ -73,4 +87,5 @@
     "talk": "Talk to him",
     "other": "Other"
   }
+
 }
