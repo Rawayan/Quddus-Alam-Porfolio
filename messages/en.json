@@ -20,8 +20,14 @@
     "description": "Freelance photojournalist and visual storyteller from Gaibandha, Bangladesh.",
     "yearsActive": "Years Active",
     "exhibitions": "Exhibitions",
-    "awards": "Awards"
-  },
+    "awards": "Awards",
+    "viewGallery": "Explore the Gallery",
+    "contact": "Get in Touch",
+    "portraitAlt": "Portrait of Md. Quddus Alam",
+    "bannerAlt": "Photography portfolio banner",
+    "workAlt": "Md. Quddus Alam at work",
+    "fieldAlt": "Md. Quddus Alam working in the field"
+},
 
   "gallery": {
     "title": "Gallery",
