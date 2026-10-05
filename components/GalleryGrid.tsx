@@ -1,35 +1,33 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import {useLocale, useTranslations} from "next-intl";
-import {useEffect, useMemo, useState} from "react";
+import { useLocale, useTranslations } from "next-intl";
 
-import PhotoFrame from "./PhotoFrame";
+import type { Photo, PhotoCategory } from "@/content/types";
+import { photos } from "@/content/photos";
+import PhotoFrame from "@/components/PhotoFrame";
+import Lightbox from "@/components/Lightbox";
 
-import {photos} from "../content/photos";
-import {Photo, PhotoCategory} from "../content/types";
+type FilterKey = "all" | PhotoCategory;
 
-type FilterValue = "all" | PhotoCategory;
-
-const filters: FilterValue[] = [
+const filters: FilterKey[] = [
   "all",
   "rivers",
   "rural",
   "fields",
-  "skies"
+  "skies",
 ];
 
-function shufflePhotos(items: Photo[]): Photo[] {
+function shufflePhotos(items: Photo[]) {
   const shuffled = [...items];
 
-  for (let i = shuffled.length - 1; i > 0; i -= 1) {
-    const randomIndex = Math.floor(
-      Math.random() * (i + 1)
-    );
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
 
-    [shuffled[i], shuffled[randomIndex]] = [
+    [shuffled[index], shuffled[randomIndex]] = [
       shuffled[randomIndex],
-      shuffled[i]
+      shuffled[index],
     ];
   }
 
@@ -38,89 +36,65 @@ function shufflePhotos(items: Photo[]): Photo[] {
 
 export default function GalleryGrid() {
   const t = useTranslations("gallery");
-  const locale = useLocale() as "en" | "bn";
+  const locale = useLocale();
 
-  const [activeFilter, setActiveFilter] =
-    useState<FilterValue>("all");
-
-  const [orderedPhotos, setOrderedPhotos] =
-    useState<Photo[]>([]);
+  const [orderedPhotos, setOrderedPhotos] = useState<Photo[]>([]);
+  const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   /*
-   * Randomize only once when the page loads.
-   *
-   * Important:
-   * Changing the filter does NOT call shufflePhotos().
+   * Shuffle exactly once when the Gallery page loads.
+   * Changing filters never reshuffles the original order.
    */
   useEffect(() => {
     setOrderedPhotos(shufflePhotos(photos));
   }, []);
 
-  const visiblePhotos = useMemo(() => {
+  const filteredPhotos = useMemo(() => {
     if (activeFilter === "all") {
       return orderedPhotos;
     }
 
     return orderedPhotos.filter(
-      (photo) =>
-        photo.category === activeFilter
+      (photo) => photo.category === activeFilter,
     );
   }, [activeFilter, orderedPhotos]);
 
-  return (
-    <div>
-      {/* Filter Bar */}
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+  };
 
-      <div
-        className="
-          glass
-          glass-pill
-          mb-8
-          flex
-          w-fit
-          max-w-full
-          flex-wrap
-          gap-1.5
-          p-1.5
-        "
-        role="tablist"
-        aria-label={t("title")}
-      >
+  const closeLightbox = () => {
+    setLightboxIndex(null);
+  };
+
+  const contactHref = {
+    pathname: `/${locale}/contact`,
+    query: {
+      reason: "print",
+    },
+  };
+
+  return (
+    <>
+      {/* Filters */}
+      <div className="mb-8 flex flex-wrap gap-2">
         {filters.map((filter) => {
-          const active =
-            activeFilter === filter;
+          const isActive = activeFilter === filter;
 
           return (
             <button
               key={filter}
               type="button"
-              role="tab"
-              aria-selected={active}
-              onClick={() =>
-                setActiveFilter(filter)
-              }
-              className={`
-                rounded-full
-                px-4
-                py-2
-                text-sm
-                font-semibold
-                transition
-
-                ${
-                  active
-                    ? `
-                      bg-[var(--accent)]
-                      text-white
-                      shadow-lg
-                    `
-                    : `
-                      opacity-65
-                      hover:bg-[var(--glass-background-strong)]
-                      hover:opacity-100
-                    `
-                }
-              `}
+              onClick={() => setActiveFilter(filter)}
+              aria-pressed={isActive}
+              className={[
+                "rounded-full px-4 py-2 text-sm font-medium transition",
+                "focus:outline-none focus:ring-2 focus:ring-[var(--accent)]",
+                isActive
+                  ? "bg-[var(--accent)] text-white shadow-md"
+                  : "glass text-[var(--ink)] hover:-translate-y-0.5",
+              ].join(" ")}
             >
               {t(filter)}
             </button>
@@ -128,257 +102,70 @@ export default function GalleryGrid() {
         })}
       </div>
 
-      {/* Result Count */}
-
-      <div
-        className="
-          mb-6
-          flex
-          items-center
-          justify-between
-          gap-4
-        "
-      >
-        <p className="text-sm opacity-60">
-          {t("showing", {
-            count: visiblePhotos.length
-          })}
-        </p>
+      {/* Count */}
+      <div className="mb-6 text-sm text-[var(--muted-ink)]">
+        {t("showing", { count: filteredPhotos.length })}
       </div>
 
       {/* Gallery */}
-
-      {visiblePhotos.length > 0 ? (
-        <div
-          className="
-            columns-1
-            gap-4
-            sm:columns-2
-            lg:columns-3
-            xl:columns-4
-          "
-        >
-          {visiblePhotos.map((photo) => (
-            <GalleryPhotoCard
+      {filteredPhotos.length > 0 ? (
+        <div className="columns-1 gap-5 sm:columns-2 lg:columns-3 xl:columns-4">
+          {filteredPhotos.map((photo, index) => (
+            <button
               key={photo.id}
-              photo={photo}
-              locale={locale}
-              watermark={t("watermark")}
-              enquireLabel={t("enquire")}
-            />
+              type="button"
+              onClick={() => openLightbox(index)}
+              className="group mb-5 block w-full break-inside-avoid text-left focus:outline-none"
+              aria-label={photo.alt[locale]}
+            >
+              <PhotoFrame
+                photo={photo}
+                className="glass-card overflow-hidden transition duration-300 group-hover:-translate-y-1 group-hover:shadow-xl"
+              >
+                <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/10" />
+
+                {/* Watermark */}
+                <div className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-black/30 px-3 py-1.5 text-[10px] font-medium tracking-wide text-white/80 opacity-90 backdrop-blur-sm">
+                  {t("watermark")}
+                </div>
+
+                {/* Caption */}
+                <div className="absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/75 via-black/20 to-transparent px-4 pb-4 pt-12 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                  <p className="text-sm leading-5 text-white">
+                    {photo.caption[locale]}
+                  </p>
+                </div>
+              </PhotoFrame>
+            </button>
           ))}
         </div>
       ) : (
-        <GalleryEmptyState
-          title={t("emptyTitle")}
-          description={t("emptyDescription")}
+        <div className="glass-panel rounded-3xl px-6 py-16 text-center">
+          <h2 className="text-2xl font-semibold text-[var(--ink)]">
+            {t("emptyTitle")}
+          </h2>
+
+          <p className="mx-auto mt-3 max-w-xl text-[var(--muted-ink)]">
+            {t("emptyDescription")}
+          </p>
+
+          <Link
+            href={contactHref}
+            className="mt-6 inline-flex rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
+          >
+            {t("enquire")}
+          </Link>
+        </div>
+      )}
+
+      {/* Lightbox */}
+      {lightboxIndex !== null && filteredPhotos.length > 0 && (
+        <Lightbox
+          photos={filteredPhotos}
+          initialIndex={lightboxIndex}
+          onClose={closeLightbox}
         />
       )}
-    </div>
-  );
-}
-
-function GalleryPhotoCard({
-  photo,
-  locale,
-  watermark,
-  enquireLabel
-}: {
-  photo: Photo;
-  locale: "en" | "bn";
-  watermark: string;
-  enquireLabel: string;
-}) {
-  const caption = photo.caption[locale];
-  const alt = photo.alt[locale];
-
-  return (
-    <article
-      className="
-        group
-        mb-4
-        break-inside-avoid
-      "
-    >
-      <div
-        className="
-          relative
-          overflow-hidden
-          rounded-[1.5rem]
-        "
-      >
-        <PhotoFrame
-          src={photo.src}
-          alt={alt}
-          width={photo.width}
-          height={photo.height}
-          blurDataURL={photo.blurDataURL}
-          className="
-            rounded-[1.5rem]
-          "
-        />
-
-        {/* Watermark */}
-
-        <div
-          className="
-            pointer-events-none
-            absolute
-            bottom-4
-            right-4
-            z-10
-            rounded-full
-            border
-            border-white/20
-            bg-black/20
-            px-3
-            py-1.5
-            text-[9px]
-            font-semibold
-            uppercase
-            tracking-[0.18em]
-            text-white/75
-            backdrop-blur-md
-          "
-        >
-          {watermark}
-        </div>
-
-        {/* Caption Overlay */}
-
-        <div
-          className="
-            pointer-events-none
-            absolute
-            inset-x-0
-            bottom-0
-            z-[5]
-            bg-gradient-to-t
-            from-black/75
-            via-black/25
-            to-transparent
-            p-5
-            pt-20
-            opacity-0
-            transition
-            duration-300
-            group-hover:opacity-100
-          "
-        >
-          <p className="text-sm leading-6 text-white">
-            {caption}
-          </p>
-        </div>
-      </div>
-
-      {/* Caption / Enquiry */}
-
-      <div className="px-1 pt-3">
-        <p
-          className="
-            line-clamp-2
-            text-sm
-            leading-6
-            opacity-70
-          "
-        >
-          {caption}
-        </p>
-
-        <Link
-          href={{
-            pathname:
-              locale === "bn"
-                ? "/bn/contact"
-                : "/contact",
-            query: {
-              reason: "print",
-              photo: photo.id
-            }
-          }}
-          className="
-            mt-3
-            inline-flex
-            items-center
-            rounded-full
-            border
-            border-[var(--glass-border)]
-            bg-[var(--glass-background)]
-            px-3
-            py-2
-            text-xs
-            font-semibold
-            text-[var(--accent)]
-            shadow-sm
-            backdrop-blur-md
-            transition
-            hover:-translate-y-0.5
-            hover:bg-[var(--glass-background-strong)]
-          "
-        >
-          {enquireLabel}
-          <span
-            aria-hidden="true"
-            className="ml-1"
-          >
-            →
-          </span>
-        </Link>
-      </div>
-    </article>
-  );
-}
-
-function GalleryEmptyState({
-  title,
-  description
-}: {
-  title: string;
-  description: string;
-}) {
-  return (
-    <div
-      className="
-        glass
-        glass-panel
-        flex
-        min-h-[360px]
-        items-center
-        justify-center
-        px-6
-        py-16
-        text-center
-      "
-    >
-      <div className="max-w-xl">
-        <div
-          className="
-            mx-auto
-            mb-5
-            flex
-            h-16
-            w-16
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-[var(--glass-border)]
-            bg-[var(--glass-background-strong)]
-            text-2xl
-          "
-          aria-hidden="true"
-        >
-          ◌
-        </div>
-
-        <h2 className="text-2xl font-bold sm:text-3xl">
-          {title}
-        </h2>
-
-        <p className="mt-4 text-sm leading-7 opacity-65 sm:text-base">
-          {description}
-        </p>
-      </div>
-    </div>
+    </>
   );
 }
