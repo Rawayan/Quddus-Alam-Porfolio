@@ -9,22 +9,18 @@
    ========================================================= */
 
 :root {
-  /* Light theme */
   --background: #f4f1ea;
   --foreground: #1c2420;
   --accent: #4a7c65;
 
-  /* Glass */
   --glass-background: rgba(255, 255, 255, 0.34);
   --glass-background-strong: rgba(255, 255, 255, 0.48);
   --glass-border: rgba(255, 255, 255, 0.48);
 
-  /* Supporting colors */
   --blob-amber: rgba(226, 178, 110, 0.28);
   --blob-sage: rgba(127, 191, 160, 0.25);
   --blob-sky: rgba(127, 176, 214, 0.24);
 
-  /* Shadows */
   --shadow-glass:
     0 20px 60px rgba(28, 36, 32, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.42);
@@ -33,14 +29,12 @@
     0 28px 80px rgba(28, 36, 32, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
 
-  /* Radius */
   --radius-sm: 0.75rem;
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
   --radius-xl: 2rem;
   --radius-pill: 9999px;
 
-  /* Motion */
   --transition-fast: 180ms ease;
   --transition-normal: 280ms ease;
   --transition-slow: 450ms ease;
@@ -59,7 +53,6 @@
   --glass-background-strong: rgba(255, 255, 255, 0.07);
   --glass-border: rgba(255, 255, 255, 0.1);
 
-  /* Deep navy / teal / plum blobs */
   --blob-amber: rgba(32, 43, 70, 0.34);
   --blob-sage: rgba(48, 102, 94, 0.28);
   --blob-sky: rgba(87, 53, 92, 0.3);
@@ -109,7 +102,11 @@ h4,
 h5,
 h6 {
   margin: 0;
-  font-family: "Plus Jakarta Sans", "Noto Sans Bengali", sans-serif;
+
+  font-family:
+    "Plus Jakarta Sans",
+    "Noto Sans Bengali",
+    sans-serif;
 }
 
 p {
@@ -124,6 +121,21 @@ p {
   font-family: "Hind Siliguri", sans-serif;
 }
 
+/* Bengali typography */
+
+html[lang="bn"] body {
+  font-family: "Hind Siliguri", sans-serif;
+}
+
+html[lang="bn"] h1,
+html[lang="bn"] h2,
+html[lang="bn"] h3,
+html[lang="bn"] h4,
+html[lang="bn"] h5,
+html[lang="bn"] h6 {
+  font-family: "Noto Sans Bengali", sans-serif;
+}
+
 /* =========================================================
    BACKGROUND
    ========================================================= */
@@ -131,25 +143,31 @@ p {
 .site-background {
   position: relative;
   min-height: 100vh;
+
   overflow-x: hidden;
   isolation: isolate;
+
   background: var(--background);
 }
 
 .site-background::before,
 .site-background::after {
   content: "";
+
   position: fixed;
   z-index: -1;
-  pointer-events: none;
 
   width: 32rem;
   height: 32rem;
 
+  pointer-events: none;
+
   border-radius: 9999px;
+
   filter: blur(90px);
 
   opacity: 0.9;
+
   transition:
     background-color var(--transition-slow),
     transform var(--transition-slow);
@@ -158,31 +176,36 @@ p {
 .site-background::before {
   top: -12rem;
   left: -10rem;
+
   background: var(--blob-amber);
 }
 
 .site-background::after {
   right: -10rem;
   bottom: -12rem;
+
   background: var(--blob-sage);
 }
 
 .background-blob {
   position: fixed;
   z-index: -1;
-  pointer-events: none;
+
+  top: 35%;
+  left: 42%;
 
   width: 26rem;
   height: 26rem;
 
+  pointer-events: none;
+
   border-radius: 9999px;
+
   filter: blur(100px);
 
   background: var(--blob-sky);
-  opacity: 0.8;
 
-  top: 35%;
-  left: 42%;
+  opacity: 0.8;
 
   transition:
     background-color var(--transition-slow),
@@ -223,6 +246,7 @@ p {
 
 .glass-hover:hover {
   transform: translateY(-4px);
+
   box-shadow: var(--shadow-glass-hover);
 }
 
@@ -243,22 +267,25 @@ p {
 }
 
 /* =========================================================
-   BUTTON FOUNDATION
+   BUTTON
    ========================================================= */
 
 .glass-button {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 
   min-height: 2.75rem;
+
   padding: 0.7rem 1.15rem;
 
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-pill);
 
   background: var(--glass-background);
+
   color: var(--foreground);
 
   box-shadow: var(--shadow-glass);
@@ -266,7 +293,11 @@ p {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 
-  font-family: "Manrope", "Hind Siliguri", sans-serif;
+  font-family:
+    "Manrope",
+    "Hind Siliguri",
+    sans-serif;
+
   font-weight: 600;
 
   cursor: pointer;
@@ -280,6 +311,7 @@ p {
 
 .glass-button:hover {
   transform: translateY(-2px);
+
   box-shadow: var(--shadow-glass-hover);
 }
 
@@ -289,7 +321,9 @@ p {
 
 .glass-button-primary {
   background: var(--accent);
+
   color: #ffffff;
+
   border-color: transparent;
 }
 
@@ -335,25 +369,14 @@ p {
   .site-background::after {
     width: 20rem;
     height: 20rem;
+
     filter: blur(70px);
   }
 
   .background-blob {
     width: 18rem;
     height: 18rem;
+
     filter: blur(80px);
   }
-}
-
-html:lang(bn) {
-  font-family: "Hind Siliguri", sans-serif;
-}
-
-html:lang(bn) h1,
-html:lang(bn) h2,
-html:lang(bn) h3,
-html:lang(bn) h4,
-html:lang(bn) h5,
-html:lang(bn) h6 {
-  font-family: "Noto Sans Bengali", sans-serif;
 }

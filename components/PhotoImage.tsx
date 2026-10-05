@@ -23,16 +23,37 @@ export default function PhotoImage({
   className = "",
   blurDataURL
 }: PhotoImageProps) {
+  if (fill) {
+    return (
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes={sizes}
+        placeholder={
+          blurDataURL
+            ? "blur"
+            : "empty"
+        }
+        blurDataURL={blurDataURL}
+        className={className}
+      />
+    );
+  }
+
   return (
     <Image
       src={src}
       alt={alt}
-      width={fill ? undefined : width}
-      height={fill ? undefined : height}
-      fill={fill}
+      width={width ?? 1600}
+      height={height ?? 1067}
       priority={priority}
-      sizes={fill ? sizes : undefined}
-      placeholder={blurDataURL ? "blur" : "empty"}
+      placeholder={
+        blurDataURL
+          ? "blur"
+          : "empty"
+      }
       blurDataURL={blurDataURL}
       className={className}
     />

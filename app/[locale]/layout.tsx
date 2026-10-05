@@ -3,9 +3,12 @@ import {notFound} from "next/navigation";
 import {locales, Locale} from "../../i18n";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import LocaleDocument from "../../components/LocaleDocument";
 
 export function generateStaticParams() {
-  return locales.map((locale) => ({locale}));
+  return locales.map((locale) => ({
+    locale
+  }));
 }
 
 export default async function LocaleLayout({
@@ -13,7 +16,9 @@ export default async function LocaleLayout({
   params
 }: {
   children: React.ReactNode;
-  params: {locale: string};
+  params: {
+    locale: string;
+  };
 }) {
   const {locale} = params;
 
@@ -21,10 +26,17 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  const messages = (await import(`../../messages/${locale}.json`)).default;
+  const messages = (
+    await import(`../../messages/${locale}.json`)
+  ).default;
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider
+      locale={locale}
+      messages={messages}
+    >
+      <LocaleDocument />
+
       <div className="min-h-screen">
         <Navbar />
 

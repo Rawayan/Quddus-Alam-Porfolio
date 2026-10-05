@@ -30,13 +30,20 @@
 },
 
   "gallery": {
-    "title": "Gallery",
-    "description": "A collection of photographs documenting landscapes, rural life, rivers, fields, and skies.",
+    "eyebrow": "The Gallery",
+    "title": "A life seen through the lens",
+    "description": "A collection of landscapes, rural life, rivers, fields, and skies from Bangladesh.",
     "all": "All",
     "rivers": "Rivers",
     "rural": "Rural Life",
     "fields": "Fields",
-    "skies": "Skies"
+    "skies": "Skies",
+    "photoCount": "{count} photographs",
+    "watermark": "Md. Quddus Alam",
+    "enquire": "Enquire about this print",
+    "emptyTitle": "Photographs are coming soon",
+    "emptyDescription": "The gallery is ready. The final collection of photographs will be added during the content integration stage.",
+    "showing": "Showing {count} photographs"
   },
 
   "achievements": {
