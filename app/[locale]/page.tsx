@@ -112,3 +112,21 @@ export default async function HomePage() {
     </PageContainer>
   );
 }
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: "en" | "bn" };
+}) {
+  const isBangla = params.locale === "bn";
+
+  return {
+    title: isBangla
+      ? "মো. কুদ্দুস আলম — ফ্রিল্যান্স ফটোসাংবাদিক"
+      : "Md. Quddus Alam — Freelance Photojournalist",
+
+    description: isBangla
+      ? "বাংলাদেশের মানুষ, প্রকৃতি, নদী ও গ্রামীণ জীবনকে ধারণ করা মো. কুদ্দুস আলমের ফটোগ্রাফি পোর্টফোলিও।"
+      : "Photography portfolio of Md. Quddus Alam, documenting people, landscapes, rivers, rural life, and stories from Bangladesh.",
+  };
+}

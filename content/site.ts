@@ -45,8 +45,8 @@ export const homeStats: Stat[] = [
 ];
 
 export const contactInfo: ContactInfo = {
-  email: "your-email@example.com",
-  phone: "+880 1XXXXXXXXX",
+  email: "Mail.quddus@gmail.com",
+  phone: "+880 1712542948",
   location: {
     en: "Gaibandha, Bangladesh",
     bn: "গাইবান্ধা, বাংলাদেশ",

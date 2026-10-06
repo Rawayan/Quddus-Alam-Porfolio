@@ -131,3 +131,18 @@ export default async function ContactPage({
     </main>
   );
 }
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: "en" | "bn" };
+}) {
+  const isBangla = params.locale === "bn";
+
+  return {
+    title: isBangla ? "যোগাযোগ" : "Contact",
+    description: isBangla
+      ? "মো. কুদ্দুস আলমের সঙ্গে ফটোগ্রাফি, প্রিন্ট ও অন্যান্য কাজের জন্য যোগাযোগ করুন।"
+      : "Contact Md. Quddus Alam for photography, print enquiries, and professional work.",
+  };
+}

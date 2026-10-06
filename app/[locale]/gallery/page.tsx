@@ -62,3 +62,18 @@ export default async function GalleryPage() {
     </PageContainer>
   );
 }
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: "en" | "bn" };
+}) {
+  const isBangla = params.locale === "bn";
+
+  return {
+    title: isBangla ? "গ্যালারি" : "Gallery",
+    description: isBangla
+      ? "বাংলাদেশের নদী, গ্রামীণ জীবন, মাঠ ও আকাশের আলোকচিত্র সংগ্রহ।"
+      : "A photography collection of rivers, rural life, fields, and skies from Bangladesh.",
+  };
+}

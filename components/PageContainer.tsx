@@ -1,15 +1,19 @@
+import type { ReactNode } from "react";
+
+type PageContainerProps = {
+  children: ReactNode;
+  className?: string;
+};
+
 export default function PageContainer({
   children,
-  className = ""
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+  className = "",
+}: PageContainerProps) {
   return (
-    <main
-      className={`mx-auto w-full max-w-7xl px-4 pb-16 pt-10 sm:px-6 sm:pt-14 lg:px-8 lg:pt-16 ${className}`}
+    <div
+      className={`page-shell mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 ${className}`}
     >
       {children}
-    </main>
+    </div>
   );
 }

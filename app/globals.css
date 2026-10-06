@@ -380,3 +380,132 @@ html[lang="bn"] h6 {
     filter: blur(80px);
   }
 }
+
+/* =========================================================
+   RESPONSIVE & ACCESSIBILITY
+   ========================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+/* Better keyboard visibility */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Interactive elements should have a comfortable touch target */
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent long text from breaking layouts */
+h1,
+h2,
+h3,
+h4,
+p,
+span,
+a {
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   MOBILE — 360px+
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .page-shell {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .glass-panel {
+    border-radius: 1.25rem;
+  }
+
+  .glass-card {
+    border-radius: 1.125rem;
+  }
+
+  /* Comfortable mobile touch targets */
+  button,
+  a[role="button"] {
+    min-height: 44px;
+  }
+
+  /* Prevent mobile horizontal overflow */
+  .mobile-scroll-safe {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .page-shell {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1280px) {
+  .page-shell {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   HIGH CONTRAST / FORCED COLORS
+   ========================================================= */
+
+@media (forced-colors: active) {
+  *,
+  *::before,
+  *::after {
+    border-color: CanvasText;
+  }
+
+  button,
+  a {
+    forced-color-adjust: auto;
+  }
+}

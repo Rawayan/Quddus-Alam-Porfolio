@@ -90,3 +90,18 @@ export default async function GaibandhaPage({
     </main>
   );
 }
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: "en" | "bn" };
+}) {
+  const isBangla = params.locale === "bn";
+
+  return {
+    title: isBangla ? "গাইবান্ধা" : "Gaibandha",
+    description: isBangla
+      ? "নদী, মাঠ, গ্রামীণ জীবন ও প্রাকৃতিক দৃশ্যের মাধ্যমে গাইবান্ধাকে দেখার একটি আলোকচিত্র সংগ্রহ।"
+      : "A photographic exploration of Gaibandha through rivers, fields, rural life, and landscapes.",
+  };
+}

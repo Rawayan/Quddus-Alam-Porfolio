@@ -107,3 +107,18 @@ export default async function AchievementsPage({
     </main>
   );
 }
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: "en" | "bn" };
+}) {
+  const isBangla = params.locale === "bn";
+
+  return {
+    title: isBangla ? "অর্জন ও স্বীকৃতি" : "Achievements",
+    description: isBangla
+      ? "মো. কুদ্দুস আলমের পুরস্কার, প্রদর্শনী, প্রকাশনা ও স্বীকৃতির ইতিহাস।"
+      : "Awards, exhibitions, publications, and recognition from Md. Quddus Alam's photography career.",
+  };
+}

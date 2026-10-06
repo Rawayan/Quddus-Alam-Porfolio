@@ -8,8 +8,8 @@ type PhotoImageProps = {
   fill?: boolean;
   priority?: boolean;
   sizes?: string;
-  className?: string;
   blurDataURL?: string;
+  className?: string;
 };
 
 export default function PhotoImage({
@@ -20,9 +20,16 @@ export default function PhotoImage({
   fill = false,
   priority = false,
   sizes,
+  blurDataURL,
   className = "",
-  blurDataURL
 }: PhotoImageProps) {
+  const imageProps = blurDataURL
+    ? {
+        placeholder: "blur" as const,
+        blurDataURL,
+      }
+    : {};
+
   if (fill) {
     return (
       <Image
@@ -31,13 +38,8 @@ export default function PhotoImage({
         fill
         priority={priority}
         sizes={sizes}
-        placeholder={
-          blurDataURL
-            ? "blur"
-            : "empty"
-        }
-        blurDataURL={blurDataURL}
         className={className}
+        {...imageProps}
       />
     );
   }
@@ -47,15 +49,11 @@ export default function PhotoImage({
       src={src}
       alt={alt}
       width={width ?? 1600}
-      height={height ?? 1067}
+      height={height ?? 1000}
       priority={priority}
-      placeholder={
-        blurDataURL
-          ? "blur"
-          : "empty"
-      }
-      blurDataURL={blurDataURL}
+      sizes={sizes}
       className={className}
+      {...imageProps}
     />
   );
 }

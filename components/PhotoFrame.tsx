@@ -6,12 +6,14 @@ type PhotoFrameProps = {
   photo: Photo;
   className?: string;
   children?: ReactNode;
+  sizes?: string;
 };
 
 export default function PhotoFrame({
   photo,
   className = "",
   children,
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
 }: PhotoFrameProps) {
   return (
     <figure
@@ -23,10 +25,10 @@ export default function PhotoFrame({
       <PhotoImage
         src={photo.src}
         alt={photo.alt.en}
-        width={photo.width}
-        height={photo.height}
+        fill
+        sizes={sizes}
         blurDataURL={photo.blurDataURL}
-        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
       />
 
       {children}

@@ -4,6 +4,7 @@ import {locales, Locale} from "../../i18n";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import LocaleDocument from "../../components/LocaleDocument";
+import JsonLd from "@/components/JsonLd";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({
@@ -31,19 +32,15 @@ export default async function LocaleLayout({
   ).default;
 
   return (
-    <NextIntlClientProvider
-      locale={locale}
-      messages={messages}
-    >
-      <LocaleDocument />
+  <NextIntlClientProvider messages={messages}>
+    <LocaleDocument />
+    <JsonLd locale={locale as "en" | "bn"} />
 
-      <div className="min-h-screen">
-        <Navbar />
+    <Navbar />
 
-        {children}
+    <main>{children}</main>
 
-        <Footer />
-      </div>
-    </NextIntlClientProvider>
-  );
+    <Footer />
+  </NextIntlClientProvider>
+);
 }
