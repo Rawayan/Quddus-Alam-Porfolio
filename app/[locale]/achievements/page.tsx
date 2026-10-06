@@ -34,15 +34,11 @@ export default async function AchievementsPage({
   });
 
   const currentYear = new Date().getFullYear();
-
   const careerStartYear = 2004;
 
   const years =
     achievements.length > 0
-      ? Math.max(
-          currentYear - careerStartYear,
-          1,
-        )
+      ? Math.max(currentYear - careerStartYear, 1)
       : 0;
 
   const awards = achievements.filter(
@@ -57,14 +53,20 @@ export default async function AchievementsPage({
     (item) => item.type === "publication",
   ).length;
 
-
   return (
     <main className="pb-20">
       {/* Hero */}
       <section className="mx-auto max-w-7xl px-4 pb-14 pt-12 sm:px-6 lg:px-8 lg:pb-20 lg:pt-20">
         <div className="glass-panel relative overflow-hidden rounded-[2rem] px-6 py-12 sm:px-10 sm:py-16 lg:px-16">
-          <div className="blob blob-amber -right-24 -top-32" />
-          <div className="blob blob-sage -bottom-32 left-1/3" />
+          <div
+            aria-hidden="true"
+            className="blob blob-amber -right-24 -top-32"
+          />
+
+          <div
+            aria-hidden="true"
+            className="blob blob-sage -bottom-32 left-1/3"
+          />
 
           <div className="relative max-w-4xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
@@ -106,19 +108,4 @@ export default async function AchievementsPage({
       </section>
     </main>
   );
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: "en" | "bn" };
-}) {
-  const isBangla = params.locale === "bn";
-
-  return {
-    title: isBangla ? "অর্জন ও স্বীকৃতি" : "Achievements",
-    description: isBangla
-      ? "মো. কুদ্দুস আলমের পুরস্কার, প্রদর্শনী, প্রকাশনা ও স্বীকৃতির ইতিহাস।"
-      : "Awards, exhibitions, publications, and recognition from Md. Quddus Alam's photography career.",
-  };
 }

@@ -1,6 +1,9 @@
-import {NextIntlClientProvider} from "next-intl";
-import {notFound} from "next/navigation";
-import {locales, Locale} from "../../i18n";
+
+import { NextIntlClientProvider } from "next-intl";
+import { notFound } from "next/navigation";
+
+import { locales, Locale } from "../../i18n";
+
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import LocaleDocument from "../../components/LocaleDocument";
@@ -8,20 +11,20 @@ import JsonLd from "@/components/JsonLd";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({
-    locale
+    locale,
   }));
 }
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
   params: {
     locale: string;
   };
 }) {
-  const {locale} = params;
+  const { locale } = params;
 
   if (!locales.includes(locale as Locale)) {
     notFound();
@@ -32,15 +35,16 @@ export default async function LocaleLayout({
   ).default;
 
   return (
-  <NextIntlClientProvider messages={messages}>
-    <LocaleDocument />
-    <JsonLd locale={locale as "en" | "bn"} />
+    <NextIntlClientProvider messages={messages}>
+      <LocaleDocument />
 
-    <Navbar />
+      <JsonLd locale={locale as "en" | "bn"} />
 
-    <main>{children}</main>
+      <Navbar />
 
-    <Footer />
-  </NextIntlClientProvider>
-);
+      {children}
+
+      <Footer />
+    </NextIntlClientProvider>
+  );
 }

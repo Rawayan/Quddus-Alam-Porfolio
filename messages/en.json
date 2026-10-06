@@ -1,3 +1,4 @@
+
 {
   "common": {
     "home": "Home",
@@ -27,7 +28,7 @@
     "bannerAlt": "Photography portfolio banner",
     "workAlt": "Md. Quddus Alam at work",
     "fieldAlt": "Md. Quddus Alam working in the field"
-},
+  },
 
   "gallery": {
     "eyebrow": "The Gallery",
@@ -61,67 +62,65 @@
     "year": "Year",
     "entries": "{count} achievements",
     "stats": {
-    "years": "Years of Work",
-    "awards": "Awards",
-    "exhibitions": "Exhibitions",
-    "publications": "Publications"
-  }
+      "years": "Years of Work",
+      "awards": "Awards",
+      "exhibitions": "Exhibitions",
+      "publications": "Publications"
+    }
   },
-
 
   "gaibandha": {
     "eyebrow": "Gaibandha",
-  "title": "A place seen through a familiar lens",
-  "description": "A visual journey through the rivers, rural landscapes, fields, and everyday life of Gaibandha.",
-  "explore": "Explore Gaibandha",
-  "panoramic": "Panoramic",
-  "strip": "River & Rural Life",
-  "asymmetric": "Land & Landscape",
-  "quad": "Four Views",
-  "emptyTitle": "Photographs are coming soon",
-  "emptyDescription": "The Gaibandha collection is ready for the final photographs to be added during the content integration stage.",
-  "viewPhoto": "View photograph",
-  "previous": "Previous",
-  "next": "Next",
-  "mapTitle": "Explore the collection",
-  "mapDescription": "Choose a section to jump directly to that part of the collection.",
-  "sectionPhotos": "{count} photographs",
-  "enquire": "Enquire about this print"
+    "title": "A place seen through a familiar lens",
+    "description": "A visual journey through the rivers, rural landscapes, fields, and everyday life of Gaibandha.",
+    "explore": "Explore Gaibandha",
+    "panoramic": "Panoramic",
+    "strip": "River & Rural Life",
+    "asymmetric": "Land & Landscape",
+    "quad": "Four Views",
+    "emptyTitle": "Photographs are coming soon",
+    "emptyDescription": "The Gaibandha collection is ready for the final photographs to be added during the content integration stage.",
+    "viewPhoto": "View photograph",
+    "previous": "Previous",
+    "next": "Next",
+    "mapTitle": "Explore the collection",
+    "mapDescription": "Choose a section to jump directly to that part of the collection.",
+    "sectionPhotos": "{count} photographs",
+    "enquire": "Enquire about this print"
   },
 
   "contact": {
     "eyebrow": "Get in touch",
-  "title": "Let's talk about a photograph",
-  "description": "For print enquiries, assignments, collaborations, or general questions, send a message.",
-  "formTitle": "Send a message",
-  "name": "Your name",
-  "namePlaceholder": "Enter your name",
-  "email": "Email address",
-  "emailPlaceholder": "you@example.com",
-  "reason": "Reason for contact",
-  "reasonPlaceholder": "Select a reason",
-  "print": "Print enquiry",
-  "assignment": "Photography assignment",
-  "collaboration": "Collaboration",
-  "general": "General enquiry",
-  "message": "Message",
-  "messagePlaceholder": "Tell me a little about your enquiry...",
-  "send": "Open email client",
-  "sending": "Preparing...",
-  "honeypot": "Leave this field empty",
-  "successTitle": "Your email client is ready",
-  "successDescription": "Your message has been prepared. Complete the sending process from your email application.",
-  "errorTitle": "Please check the form",
-  "required": "This field is required.",
-  "invalidEmail": "Please enter a valid email address.",
-  "messageTooShort": "Please enter at least 10 characters.",
-  "location": "Gaibandha, Bangladesh",
-  "phone": "Phone",
-  "emailLabel": "Email",
-  "available": "Available for selected assignments",
-  "printPhoto": "Print enquiry for photograph",
-  "photoReference": "Photograph reference",
-  "removePhoto": "Remove photograph reference"
+    "title": "Let's talk about a photograph",
+    "description": "For print enquiries, assignments, collaborations, or general questions, send a message.",
+    "formTitle": "Send a message",
+    "name": "Your name",
+    "namePlaceholder": "Enter your name",
+    "email": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "reason": "Reason for contact",
+    "reasonPlaceholder": "Select a reason",
+    "print": "Print enquiry",
+    "assignment": "Photography assignment",
+    "collaboration": "Collaboration",
+    "general": "General enquiry",
+    "message": "Message",
+    "messagePlaceholder": "Tell me a little about your enquiry...",
+    "send": "Open email client",
+    "sending": "Preparing...",
+    "honeypot": "Leave this field empty",
+    "successTitle": "Your email client is ready",
+    "successDescription": "Your message has been prepared. Complete the sending process from your email application.",
+    "errorTitle": "Please check the form",
+    "required": "This field is required.",
+    "invalidEmail": "Please enter a valid email address.",
+    "messageTooShort": "Please enter at least 10 characters.",
+    "location": "Gaibandha, Bangladesh",
+    "phone": "Phone",
+    "emailLabel": "Email",
+    "available": "Available for selected assignments",
+    "printPhoto": "Print enquiry for photograph",
+    "photoReference": "Photograph reference",
+    "removePhoto": "Remove photograph reference"
   }
-
 }

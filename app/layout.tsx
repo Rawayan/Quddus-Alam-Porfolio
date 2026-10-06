@@ -80,12 +80,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <div className="site-background" aria-hidden="true">
+        {/* Fixed visual background — does NOT take layout space */}
+        <div
+          className="site-background"
+          aria-hidden="true"
+        >
           <div className="blob blob-amber" />
           <div className="blob blob-sage" />
           <div className="blob blob-sky" />
         </div>
 
+        {/* Actual application */}
         {children}
       </body>
     </html>

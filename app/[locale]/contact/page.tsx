@@ -1,5 +1,7 @@
+
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+
 import ContactForm from "@/components/ContactForm";
 import { siteContent } from "@/content/site";
 
@@ -31,13 +33,22 @@ export default async function ContactPage({
     namespace: "contact",
   });
 
+  const locale = params.locale;
+
   return (
     <main className="pb-24">
       {/* Hero */}
       <section className="mx-auto max-w-7xl px-4 pb-14 pt-12 sm:px-6 lg:px-8 lg:pb-20 lg:pt-20">
         <div className="glass-panel relative overflow-hidden rounded-[2rem] px-6 py-12 sm:px-10 sm:py-16 lg:px-16">
-          <div className="blob blob-amber -right-24 -top-32" />
-          <div className="blob blob-sage -bottom-32 left-1/3" />
+          <div
+            aria-hidden="true"
+            className="blob blob-amber -right-24 -top-32"
+          />
+
+          <div
+            aria-hidden="true"
+            className="blob blob-sage -bottom-32 left-1/3"
+          />
 
           <div className="relative max-w-4xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
@@ -55,7 +66,7 @@ export default async function ContactPage({
         </div>
       </section>
 
-      {/* Contact content */}
+      {/* Contact Content */}
       <section className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1.3fr_0.7fr] lg:px-8">
         {/* Form */}
         <div className="glass-card rounded-[2rem] p-6 sm:p-8 lg:p-10">
@@ -63,11 +74,11 @@ export default async function ContactPage({
             {t("formTitle")}
           </h2>
 
-          <p className="mt-3 mb-8 max-w-xl text-sm leading-7 text-[var(--muted-ink)]">
+          <p className="mb-8 mt-3 max-w-xl text-sm leading-7 text-[var(--muted-ink)]">
             {t("description")}
           </p>
 
-          <ContactForm locale={params.locale} />
+          <ContactForm locale={locale} />
         </div>
 
         {/* Sidebar */}
@@ -107,9 +118,7 @@ export default async function ContactPage({
             </p>
 
             <p className="mt-3 text-lg font-medium text-[var(--ink)]">
-              {siteContent.contact.location[
-                params.locale
-              ]}
+              {siteContent.contact.location[locale]}
             </p>
           </div>
 
@@ -130,19 +139,4 @@ export default async function ContactPage({
       </section>
     </main>
   );
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: "en" | "bn" };
-}) {
-  const isBangla = params.locale === "bn";
-
-  return {
-    title: isBangla ? "যোগাযোগ" : "Contact",
-    description: isBangla
-      ? "মো. কুদ্দুস আলমের সঙ্গে ফটোগ্রাফি, প্রিন্ট ও অন্যান্য কাজের জন্য যোগাযোগ করুন।"
-      : "Contact Md. Quddus Alam for photography, print enquiries, and professional work.",
-  };
 }
