@@ -51,7 +51,7 @@ export const homeStats: Stat[] = [
 ];
 
 export const contactInfo: ContactInfo = {
-  email: "Mail.quddus@gmail.com",
+  email: "mail.quddus@gmail.com",
 
   phone: "+880 1712542948",
 
