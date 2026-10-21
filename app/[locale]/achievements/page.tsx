@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import AchievementCounters from "@/components/AchievementCounters";
 import AchievementTimeline from "@/components/AchievementTimeline";
+import ProfessionalExperience from "@/components/ProfessionalExperience";
 import { achievements } from "@/content/awards";
+import { experience } from "@/content/experience";
 
 type PageProps = {
   params: {
@@ -37,26 +38,6 @@ export default async function AchievementsPage({
     namespace: "achievements",
   });
 
-  const currentYear = new Date().getFullYear();
-  const careerStartYear = 2004;
-
-  const years =
-    achievements.length > 0
-      ? Math.max(currentYear - careerStartYear, 1)
-      : 0;
-
-  const awards = achievements.filter(
-    (item) => item.type === "award",
-  ).length;
-
-  const exhibitions = achievements.filter(
-    (item) => item.type === "exhibition",
-  ).length;
-
-  const publications = achievements.filter(
-    (item) => item.type === "publication",
-  ).length;
-
   return (
     <main className="pb-20">
       {/* Hero */}
@@ -88,28 +69,15 @@ export default async function AchievementsPage({
         </div>
       </section>
 
-      {/* Counters */}
-      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-        <AchievementCounters
-          years={years}
-          awards={awards}
-          exhibitions={exhibitions}
-          publications={publications}
-          labels={{
-            years: t("stats.years"),
-            awards: t("stats.awards"),
-            exhibitions: t("stats.exhibitions"),
-            publications: t("stats.publications"),
-          }}
-        />
-      </section>
-
       {/* Timeline */}
       <section className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <AchievementTimeline
           achievements={achievements}
         />
       </section>
+
+      {/* Professional experience */}
+      <ProfessionalExperience experience={experience} />
     </main>
   );
 }

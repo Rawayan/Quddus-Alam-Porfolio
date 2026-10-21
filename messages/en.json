@@ -60,13 +60,18 @@
     "emptyDescription": "The achievements timeline is ready. Verified career milestones will be added during the content integration stage.",
     "timeline": "Career Timeline",
     "year": "Year",
-    "entries": "{count} achievements",
-    "stats": {
-      "years": "Years of Work",
-      "awards": "Awards",
-      "exhibitions": "Exhibitions",
-      "publications": "Publications"
-    }
+    "entries": "{count} achievements"
+  },
+
+  "experience": {
+    "eyebrow": "Experience",
+    "title": "Professional Experience",
+    "subtitle": "A career dedicated to documenting people, communities, and the changing realities of Bangladesh.",
+    "newsAgency": "News Agency Representation",
+    "freelance": "Freelance Photography & Documentary Assignments",
+    "additional": "Additional Professional Experience",
+    "organizations": "Organizations & Assignments",
+    "fieldExperience": "Field Experience"
   },
 
   "gaibandha": {

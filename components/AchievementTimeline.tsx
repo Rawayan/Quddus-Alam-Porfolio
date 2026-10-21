@@ -118,6 +118,12 @@ export default function AchievementTimeline({
                 const description =
                   achievement.description?.[locale];
 
+                const previous =
+                  filteredAchievements[index - 1];
+
+                const startsYear =
+                  !previous || previous.year !== achievement.year;
+
                 return (
                   <article
                     key={achievement.id}
@@ -125,7 +131,14 @@ export default function AchievementTimeline({
                   >
                     {/* Year */}
                     <div className="relative z-10 flex flex-col items-center">
-                      <span className="rounded-full bg-[var(--accent)] px-2 py-1 text-xs font-semibold text-white sm:px-3">
+                      <span
+                        className={[
+                          "rounded-full px-2 py-1 text-xs font-semibold sm:px-3",
+                          startsYear
+                            ? "bg-[var(--accent)] text-white"
+                            : "border border-[var(--accent)]/40 text-[var(--accent)]",
+                        ].join(" ")}
+                      >
                         {achievement.year}
                       </span>
 

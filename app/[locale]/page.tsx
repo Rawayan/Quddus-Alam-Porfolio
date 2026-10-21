@@ -70,13 +70,17 @@ export default async function HomePage({
                 {t("home.eyebrow")}
               </p>
 
-              <p className="mt-6 text-base leading-8 text-[var(--muted-ink)] sm:text-lg">
-                {bio[localizedLocale]}
-              </p>
+              <div className="mt-6 space-y-4 text-base leading-8 text-[var(--muted-ink)] sm:text-lg">
+                {bio[localizedLocale]
+                  .split("\n\n")
+                  .map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+              </div>
             </div>
 
             {/* Stats */}
-            <div className="mt-8 grid grid-cols-3 gap-3">
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {homeStats.map((stat) => (
                 <StatCard key={stat.id} stat={stat} />
               ))}

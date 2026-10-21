@@ -44,6 +44,37 @@ export type Stat = {
   label: BilingualText;
 };
 
+/*
+ * Professional experience records. They are kept separate from
+ * the achievements collection so that filters, counters and the
+ * awards timeline are never affected by them.
+ */
+export type ExperienceRole = {
+  id: string;
+  label: BilingualText;
+  organization: BilingualText;
+  title?: BilingualText;
+  period?: BilingualText;
+  startYear?: number;
+  description?: BilingualText;
+};
+
+export type ExperienceOrganization = {
+  id: string;
+  name: BilingualText;
+};
+
+export type ExperienceProfile = {
+  agencies: ExperienceRole[];
+  freelance: {
+    title: BilingualText;
+    description: BilingualText;
+    organizations: ExperienceOrganization[];
+    fieldNote: BilingualText;
+  };
+  additional: ExperienceRole[];
+};
+
 export type GaibandhaSection = {
   id: string;
   title: BilingualText;
