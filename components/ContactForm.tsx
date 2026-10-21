@@ -6,10 +6,6 @@ import { useTranslations } from "next-intl";
 
 import { siteContent } from "@/content/site";
 
-type ContactFormProps = {
-  locale: "en" | "bn";
-};
-
 type FormState = {
   name: string;
   email: string;
@@ -37,9 +33,7 @@ const validReasons = [
   "general",
 ];
 
-export default function ContactForm({
-  locale,
-}: ContactFormProps) {
+export default function ContactForm() {
   const t = useTranslations("contact");
   const searchParams = useSearchParams();
 

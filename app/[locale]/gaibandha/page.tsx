@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import GaibandhaGallery from "@/components/GaibandhaGallery";
 import GaibandhaMap from "@/components/GaibandhaMap";
@@ -20,6 +20,8 @@ type PageProps = {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
+  setRequestLocale(params.locale);
+
   const t = await getTranslations({
     locale: params.locale,
     namespace: "gaibandha",
@@ -34,6 +36,8 @@ export async function generateMetadata({
 export default async function GaibandhaPage({
   params,
 }: PageProps) {
+  setRequestLocale(params.locale);
+
   const t = await getTranslations({
     locale: params.locale,
     namespace: "gaibandha",

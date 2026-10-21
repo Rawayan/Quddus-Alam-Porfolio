@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import PageContainer from "../../components/PageContainer";
 import StatCard from "../../components/StatCard";
@@ -9,11 +9,16 @@ import HomeImageCard from "../../components/HomeImageCard";
 
 import { bio, homeMedia, homeStats } from "../../content";
 
-export default async function HomePage() {
-  const t = await getTranslations();
-  const locale = await getLocale();
+export default async function HomePage({
+  params,
+}: {
+  params: { locale: "en" | "bn" };
+}) {
+  setRequestLocale(params.locale);
 
-  const localizedLocale = locale as "en" | "bn";
+  const t = await getTranslations({ locale: params.locale });
+
+  const localizedLocale = params.locale;
 
   const galleryHref =
     localizedLocale === "bn" ? "/bn/gallery" : "/gallery";
@@ -126,6 +131,8 @@ export async function generateMetadata({
 }: {
   params: { locale: "en" | "bn" };
 }): Promise<Metadata> {
+  setRequestLocale(params.locale);
+
   const isBangla = params.locale === "bn";
 
   return {

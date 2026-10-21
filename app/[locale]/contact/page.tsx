@@ -1,8 +1,10 @@
 
+import { Suspense } from "react";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import ContactForm from "@/components/ContactForm";
+import ContactFormFallback from "@/components/ContactFormFallback";
 import { siteContent } from "@/content/site";
 
 type PageProps = {
@@ -14,6 +16,8 @@ type PageProps = {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
+  setRequestLocale(params.locale);
+
   const t = await getTranslations({
     locale: params.locale,
     namespace: "contact",
@@ -28,6 +32,8 @@ export async function generateMetadata({
 export default async function ContactPage({
   params,
 }: PageProps) {
+  setRequestLocale(params.locale);
+
   const t = await getTranslations({
     locale: params.locale,
     namespace: "contact",
@@ -78,7 +84,9 @@ export default async function ContactPage({
             {t("description")}
           </p>
 
-          <ContactForm locale={locale} />
+          <Suspense fallback={<ContactFormFallback />}>
+            <ContactForm />
+          </Suspense>
         </div>
 
         {/* Sidebar */}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import AchievementCounters from "@/components/AchievementCounters";
 import AchievementTimeline from "@/components/AchievementTimeline";
@@ -14,6 +14,8 @@ type PageProps = {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
+  setRequestLocale(params.locale);
+
   const t = await getTranslations({
     locale: params.locale,
     namespace: "achievements",
@@ -28,6 +30,8 @@ export async function generateMetadata({
 export default async function AchievementsPage({
   params,
 }: PageProps) {
+  setRequestLocale(params.locale);
+
   const t = await getTranslations({
     locale: params.locale,
     namespace: "achievements",

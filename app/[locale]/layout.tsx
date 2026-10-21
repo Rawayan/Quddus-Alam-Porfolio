@@ -1,6 +1,7 @@
 
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 
 import { locales, Locale } from "../../i18n";
 
@@ -30,12 +31,14 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  setRequestLocale(locale);
+
   const messages = (
     await import(`../../messages/${locale}.json`)
   ).default;
 
   return (
-    <NextIntlClientProvider messages={messages}>
+    <NextIntlClientProvider locale={locale} messages={messages}>
       <LocaleDocument />
 
       <JsonLd locale={locale as "en" | "bn"} />

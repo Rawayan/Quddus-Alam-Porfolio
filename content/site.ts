@@ -1,4 +1,3 @@
-
 import type { ContactInfo, Stat } from "./types";
 
 export const siteIdentity = {

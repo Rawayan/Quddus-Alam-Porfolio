@@ -1,13 +1,21 @@
 
 import type { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import PageContainer from "../../../components/PageContainer";
 import GalleryGrid from "../../../components/GalleryGrid";
 
-export default async function GalleryPage() {
-  const t = await getTranslations("gallery");
-  const locale = await getLocale();
+export default async function GalleryPage({
+  params,
+}: {
+  params: { locale: "en" | "bn" };
+}) {
+  setRequestLocale(params.locale);
+
+  const t = await getTranslations({
+    locale: params.locale,
+    namespace: "gallery",
+  });
 
   return (
     <main>
